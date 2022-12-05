@@ -8,8 +8,15 @@ import {sendGraphQl} from "../Utils";
 import Consts from "../Consts";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
+// react-navigation way to instantiate a tab navigator
 const Tab = createMaterialBottomTabNavigator();
 
+/**
+ * A component that displays information about a member in a react-native-paper contained card
+ * @param name Name of the member
+ * @param img Image to be displayed on the member box
+ * @param children Child elements of the node
+ */
 const Member = ({name, img, children}) => {
     if (!img) img = require('../assets/profileplaceholder.png');
 
@@ -32,6 +39,10 @@ const Member = ({name, img, children}) => {
     )
 }
 
+/**
+ * The information page under the about section of the app.
+ * Contains general information about the VIP and a few images.
+ */
 const InfoPage = () => {
     const width = Dimensions.get('window').width;
     const aboutBanner = "../assets/placeholder.jpg"
@@ -80,15 +91,19 @@ const InfoPage = () => {
     )
 }
 
+/**
+ * Members list that pulls from the website
+ */
 const MembersList = () => {
 
+    const catId = "dGVybToxMQ==";
     const [wait, setWait] = useState(true);
     const [refresh, setRefresh] = useState(false);
     const [mems, setMems] = useState([]);
 
     const fetchMembers = async () => {
         const query = `query Members {
-                          category(id: "dGVybToxMQ==") {
+                          category(id: ${catId}) {
                             posts {
                               nodes {
                                 content
@@ -145,6 +160,9 @@ const MembersList = () => {
     )
 }
 
+/**
+ * Hardcoded members list
+ */
 const MembersHardcoded = () => {
     return (
         <ScrollView style={{paddingLeft: 16, paddingRight: 16}}>
@@ -172,10 +190,13 @@ const MembersHardcoded = () => {
     )
 }
 
+/**
+ * About page with navigators to each tab
+ */
 export default function About() {
-
     return (
         <Tab.Navigator>
+            {/* Each tab is a different screen using tab navigators */}
             <Tab.Screen name="About Us" component={InfoPage} options={{
                 tabBarIcon: ({color, size}) => (
                     <MaterialCommunityIcons name="information" color={color} size={24}/>

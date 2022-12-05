@@ -27,6 +27,10 @@ const Stack = createStackNavigator();
 // https://reactnavigation.org/docs/material-bottom-tab-navigator/
 // https://github.com/oblador/react-native-vector-icons#installation
 
+/**
+ * The homepage for a collection with a hero image, title, and description (based on WP limitations)
+ * @param data the category data
+ */
 const CollectionHome = ({data}) => {
     const width = Dimensions.get('window').width;
     const [bannerUri, setBannerUri] = useState("")
@@ -47,6 +51,10 @@ const CollectionHome = ({data}) => {
     )
 }
 
+/**
+ * Fetches interviews from a category ID and returns a promise
+ * @param id the ID of the relevant collection
+ */
 const fetchInterviews = async (id) => {
     const query = `query NewQuery {
                       category(id: "${id}") {
@@ -69,6 +77,11 @@ const fetchInterviews = async (id) => {
     return (await sendGraphQl(query, Consts.endpoint)).data.category.posts.nodes;
 }
 
+/**
+ * Interviews page
+ * @param data The interview data
+ * @param navigation Stack navigator from App.js
+ */
 const Interviews = ({data, navigation}) => {
 
     const [wait, setWait] = useState(true);
@@ -134,6 +147,16 @@ const Interviews = ({data, navigation}) => {
     )
 }
 
+// I believe that this stack is unnecessary
+/*
+
+Instead of the Tab navigator in CollectionComp pointing to Interviews stack, point it directly to
+the <Interviews> component with relevant parameters. Then this can be deleted as it won't have any
+usages.
+
+This was originally to create a new stack, but it created 2 headers on the page and that caused issues 🙃
+
+ */
 const InterviewsStack = ({catData, headnav}) => {
     return (
         <Stack.Navigator>
@@ -145,6 +168,11 @@ const InterviewsStack = ({catData, headnav}) => {
     )
 }
 
+/**
+ * The main collections component that defines tab routes
+ * @param route Route information which contains params. Check react-navigation documentation for more details
+ * @param navigation Stack navigator from App.js to pass to components down the line. This is jank, use Redux?
+ */
 const CollectionComp = ({route, navigation}) => {
     return (
         <Tab.Navigator>

@@ -19,6 +19,9 @@ import Consts from "../Consts";
 import RenderHTML, {defaultHTMLElementModels, HTMLContentModel} from "react-native-render-html";
 import {Link} from "@react-navigation/native";
 
+/**
+ * The interview page
+ */
 const InterviewPage = ({route, navigation}) => {
     const data = route.params.data
     const width = Dimensions.get('window').width;

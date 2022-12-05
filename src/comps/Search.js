@@ -2,6 +2,7 @@ import React from "react";
 import {TextInput, useColorScheme} from "react-native";
 import {CStyles as cs} from "../Styles";
 
+// Searchbar style
 const style = {
     width: '100%',
     borderRadius: 12,
@@ -10,11 +11,16 @@ const style = {
     fontSize: 16,
 }
 
-const Search = (props) => {
+/**
+ * Searchbar component
+ * @param placeholder placeholder text to display when no text is present
+ * @param onChangeText A method to call whenever the text in the searchbox is changed
+ */
+const Search = ({placeholder, onChangeText}) => {
     const dark = useColorScheme() === 'dark';
     return (
-        <TextInput placeholder={props.placeholder} placeholderTextColor='#888888'
-                   onChangeText={text => props.onChangeText(text.toLowerCase())}
+        <TextInput placeholder={placeholder} placeholderTextColor='#888888'
+                   onChangeText={text => onChangeText(text.toLowerCase())}
                    style={{...style, backgroundColor: '#88888822', color: dark ? 'white': 'black'}}
         />
     )

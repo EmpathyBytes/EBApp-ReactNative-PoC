@@ -11,6 +11,9 @@ import LinearGradient from 'react-native-linear-gradient';
 import {Card, Text} from 'react-native-paper';
 import Search from "../comps/Search";
 
+/**
+ * Gets the categories from the wordpress site
+ */
 const GetCategories = async () => {
     const query =  `query get_categories {
                         categories {
@@ -24,6 +27,9 @@ const GetCategories = async () => {
     return (await sendGraphQl(query, Consts.endpoint)).data.categories.nodes;
 }
 
+/**
+ * Component that defines the top of the page, including the logo and text
+ */
 const Top = () => {
     const imgPath = '../assets/logo.png'
     return (
@@ -41,6 +47,10 @@ const Top = () => {
     )
 }
 
+/**
+ * Component that defines a card on the home screen
+ * @param props
+ */
 const HomeCard = (props) => {
     const height = props.height ?? 96
 
@@ -69,6 +79,10 @@ const HomeCard = (props) => {
     )
 }
 
+/**
+ * About card on home page
+ * @param navigation handled by react-navigation
+ */
 const About = ({navigation}) => {
     const height = 60
     const about = {
@@ -86,6 +100,11 @@ const About = ({navigation}) => {
     )
 }
 
+/**
+ * Component Card, displays info about a collection
+ * @param data The collection in question
+ * @param navigation handled by react-navigation
+ */
 const CompCard = ({data, navigation}) => {
     return (
         <View style={{borderRadius: 12, overflow: 'hidden', marginBottom: 12}}>
@@ -98,6 +117,10 @@ const CompCard = ({data, navigation}) => {
     )
 }
 
+/**
+ * Display this component when no results are found
+ * @param props
+ */
 const Empty = (props) => {
     return (
         <View style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 32}}>
@@ -108,6 +131,10 @@ const Empty = (props) => {
     )
 }
 
+/**
+ * The query and information about the home page of the app
+ * @param navigation handled by react-navigation
+ */
 const Home = ({navigation}) => {
     const [wait, setWait] = useState(true);         // waiting for data
     const [refresh, setRefresh] = useState(false);  // same as waiting after init

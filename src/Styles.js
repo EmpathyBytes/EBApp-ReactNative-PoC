@@ -11,11 +11,14 @@ import {
 import merge from 'deepmerge';
 import {useColorScheme} from "react-native";
 
+// Adapt react-navigation themes to react-native-paper themes to be merged together
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
     light: NavigationDefaultTheme,
     dark: NavigationDarkTheme,
 });
 
+// Combine themes together with custom colors to define a theme
+// Theme generator based on a color is available on react-native-paper's documentation
 const CombinedDefaultTheme = {
     ...MD3LightTheme,
     ...LightTheme,
@@ -65,6 +68,8 @@ const CombinedDefaultTheme = {
     },
 };
 
+// Combine themes together with custom colors to define a theme
+// Theme generator based on a color is available on react-native-paper's documentation
 const CombinedDarkTheme = {
     ...MD3DarkTheme,
     ...DarkTheme,
@@ -114,6 +119,7 @@ const CombinedDarkTheme = {
     },
 };
 
+// Common stylesheets used on multiple components
 const Styles = {
     h1: {
         fontWeight: 'bold',
